@@ -36,7 +36,6 @@ public class BoekController {
             ResponseEntity<Boek> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
             return response;
         }
-
     }
 
     @PostMapping("/add")
