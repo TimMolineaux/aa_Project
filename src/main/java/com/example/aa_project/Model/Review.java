@@ -1,8 +1,7 @@
 package com.example.aa_project.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
@@ -21,10 +20,13 @@ public class Review {
     @JoinColumn(name = "isbn", nullable = false)
     private Boek boek;
 
+    @Size(min = 30, max = 500)
+    @NotBlank
     private String description;
 
     @Max(value = 5)
-    @Min(value = 0)
+    @Min(value = 1)
+    @NotNull
     private int score;
 
     private LocalDate postDate;
@@ -39,7 +41,7 @@ public class Review {
         this.boek = boek;
         this.description = description;
         this.score = score;
-        this.postDate = postDate;
+        this.postDate = LocalDate.now();
     }
 
     public int getReviewId() {

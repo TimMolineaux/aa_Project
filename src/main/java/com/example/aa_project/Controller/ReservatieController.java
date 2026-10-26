@@ -2,13 +2,14 @@ package com.example.aa_project.Controller;
 
 import com.example.aa_project.Datasource.ReservatieDAO;
 import com.example.aa_project.Model.Reservatie;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/reservatie")
+@RequestMapping("/reservation")
 public class ReservatieController {
 
     public ReservatieDAO reservatieDAO;
@@ -34,7 +35,7 @@ public class ReservatieController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Reservatie> addReservation(@RequestBody Reservatie reservatie){
+    public ResponseEntity<Reservatie> addReservation(@Valid @RequestBody Reservatie reservatie){
 
         Reservatie savedReservation = reservatieDAO.save(reservatie);
 

@@ -1,7 +1,9 @@
 package com.example.aa_project.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,6 +21,7 @@ public class Aankoop {
     @JoinColumn(name = "isbn", nullable = false)
     private Boek boek;
 
+    @Min(1)
     private int amount;
 
     private LocalDateTime purchaseDate;
@@ -32,7 +35,7 @@ public class Aankoop {
         this.gebruiker = gebruiker;
         this.boek = boek;
         this.amount = amount;
-        this.purchaseDate = purchaseDate;
+        this.purchaseDate = LocalDateTime.now();
     }
 
     public int getAankoopId() {

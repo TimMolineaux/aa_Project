@@ -2,6 +2,7 @@ package com.example.aa_project.Controller;
 
 import com.example.aa_project.Datasource.ReviewDAO;
 import com.example.aa_project.Model.Review;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class ReviewController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Review> addReview(@RequestBody Review review){
+    public ResponseEntity<Review> addReview(@Valid @RequestBody Review review){
 
         Review savedReview  = reviewDAO.save(review);
 

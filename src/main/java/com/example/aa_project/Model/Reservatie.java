@@ -1,6 +1,8 @@
 package com.example.aa_project.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -19,8 +21,10 @@ public class Reservatie {
     @JoinColumn(name = "isbn", nullable = false)
     private  Boek boek;
 
+    @Min(1)
     private int ammount;
 
+    @NotNull
     private LocalDate pickupDate;
 
     private boolean status = false;
