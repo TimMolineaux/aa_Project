@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 public class GebruikerController {
 
     public GebruikerDAO gebruikerDAO;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public GebruikerController(GebruikerDAO gebruikerDAO){
+    public GebruikerController(GebruikerDAO gebruikerDAO, PasswordEncoder passwordEncoder) {
 
         this.gebruikerDAO = gebruikerDAO;
+        this.passwordEncoder = passwordEncoder;
 
     }
 
@@ -38,6 +41,10 @@ public class GebruikerController {
 
     @PostMapping("/add")
     public ResponseEntity<Gebruiker> addUser(@Valid @RequestBody Gebruiker gebruiker){
+
+        gebruiker.setPassword(
+                passwordEncoder.encode(gebruiker.getPassword())
+        );
 
         Gebruiker savedUser = gebruikerDAO.save(gebruiker);
 

@@ -2,6 +2,7 @@ package com.example.aa_project.Controller;
 
 import com.example.aa_project.Datasource.AankoopDAO;
 import com.example.aa_project.Model.Aankoop;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class AankoopController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Aankoop> addPurchase(@RequestBody Aankoop aankoop){
+    public ResponseEntity<Aankoop> addPurchase(@Valid @RequestBody Aankoop aankoop){
 
         Aankoop savedPurchase = aankoopDAO.save(aankoop);
 
