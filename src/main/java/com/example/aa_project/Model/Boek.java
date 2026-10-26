@@ -2,23 +2,37 @@ package com.example.aa_project.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Boek {
 
     @Id
+    @NotBlank
+    @Size(max = 17)
     private String isbn;
 
+    @NotBlank
+    @Size
     private String titel;
 
+    @NotBlank
     private String auteurs;
 
+    @NotBlank
+    @Size(min = 20, max = 500)
     private String beschrijving;
 
+    @NotBlank
+    @Size(max = 20)
     private String genre;
 
+    @NotNull
+    @DecimalMin(value = "0.00")
     private Float prijs;
 
+    @NotNull
+    @Min(value = 0)
     private int voorraad;
 
     public Boek(){

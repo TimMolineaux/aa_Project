@@ -3,6 +3,7 @@ package com.example.aa_project.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Gebruiker {
@@ -17,16 +18,17 @@ public class Gebruiker {
     private String email;
 
     @NotBlank
+    @Size(min = 8, max = 70)
     private String password;
 
     public Gebruiker(){
 
     }
 
-    public Gebruiker(String password, String email, int userId) {
-        this.password = password;
-        this.email = email;
+    public Gebruiker(int userId, String email, String password) {
         this.userId = userId;
+        this.email = email;
+        this.password = password;
     }
 
     public int getUserId() {

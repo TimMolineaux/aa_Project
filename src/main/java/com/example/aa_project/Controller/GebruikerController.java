@@ -2,6 +2,7 @@ package com.example.aa_project.Controller;
 
 import com.example.aa_project.Datasource.GebruikerDAO;
 import com.example.aa_project.Model.Gebruiker;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class GebruikerController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Gebruiker> addUser(@RequestBody Gebruiker gebruiker){
+    public ResponseEntity<Gebruiker> addUser(@Valid @RequestBody Gebruiker gebruiker){
 
         Gebruiker savedUser = gebruikerDAO.save(gebruiker);
 

@@ -2,6 +2,7 @@ package com.example.aa_project.Controller;
 
 import com.example.aa_project.Datasource.BoekDAO;
 import com.example.aa_project.Model.Boek;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class BoekController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Boek> addBook(@RequestBody Boek boek) {
+    public ResponseEntity<Boek> addBook(@Valid @RequestBody Boek boek) {
         Boek savedBoek = boekDAO.save(boek);
 
         return ResponseEntity
