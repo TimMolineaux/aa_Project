@@ -10,9 +10,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -26,17 +29,20 @@ public class GebruikerControllerTest {
     private GebruikerController gebruikerController;
 
     @Test
-    void addUser(){
-        Gebruiker gebruiker = new Gebruiker();
+    void getAllUsers(){
 
-        when(gebruikerDAO.save(gebruiker)).thenReturn(gebruiker);
+        Gebruiker gebruiker1 = new Gebruiker();
+        Gebruiker gebruiker2 = new Gebruiker();
 
-        ResponseEntity<Gebruiker> response = gebruikerController.addUser(gebruiker);
+        when(gebruikerDAO.findAll()).thenReturn(List.of(gebruiker1, gebruiker2));
 
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(gebruiker, response.getBody());
+        Iterable<Gebruiker> gebruikers = gebruikerController.getAllUsers();
 
-        verify(gebruikerDAO).save(gebruiker);
+        assertNotNull(gebruikers);
+        assertEquals(2, ((Collection<?>) gebruikers).size());
+
+        verify(gebruikerDAO).findAll();
+
     }
 
     @Test
@@ -53,6 +59,31 @@ public class GebruikerControllerTest {
 
         verify(gebruikerDAO).findById(1);
 
+    }
+
+    @Test
+    void addUser(){
+        Gebruiker gebruiker = new Gebruiker();
+
+        when(gebruikerDAO.save(gebruiker)).thenReturn(gebruiker);
+
+        ResponseEntity<Gebruiker> response = gebruikerController.addUser(gebruiker);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(gebruiker, response.getBody());
+
+        verify(gebruikerDAO).save(gebruiker);
+    }
+
+    @Test
+    void deleteUser() {
+        when(gebruikerDAO.existsById(1)).thenReturn(true);
+
+        ResponseEntity<Gebruiker> response = gebruikerController.deleteUser(1);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+
+        verify(gebruikerDAO).deleteById(1);
     }
 
 }

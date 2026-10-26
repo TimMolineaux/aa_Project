@@ -20,6 +20,13 @@ public class GebruikerController {
 
     }
 
+    @GetMapping
+    public Iterable<Gebruiker> getAllUsers() {
+
+        return gebruikerDAO.findAll();
+
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Gebruiker> getUserById(@PathVariable int id){
 
@@ -37,6 +44,17 @@ public class GebruikerController {
                 .status(HttpStatus.CREATED)
                 .body(savedUser);
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Gebruiker> deleteUser(@PathVariable int id) {
+
+        if (gebruikerDAO.existsById(id)) {
+            gebruikerDAO.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
