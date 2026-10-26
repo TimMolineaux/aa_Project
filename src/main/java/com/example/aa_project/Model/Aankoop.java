@@ -2,11 +2,10 @@ package com.example.aa_project.Model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-public class Aankopen {
+public class Aankoop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +23,11 @@ public class Aankopen {
 
     private LocalDateTime purchaseDate;
 
-    public Aankopen(){
+    public Aankoop(){
 
     }
 
-    public Aankopen(int aankoopId, Gebruiker gebruiker, Boek boek, int amount, LocalDateTime purchaseDate) {
+    public Aankoop(int aankoopId, Gebruiker gebruiker, Boek boek, int amount, LocalDateTime purchaseDate) {
         this.aankoopId = aankoopId;
         this.gebruiker = gebruiker;
         this.boek = boek;
