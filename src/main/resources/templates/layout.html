@@ -8,12 +8,18 @@
 
 <div th:fragment="navbar">
 
-    <nav>
+    <nav xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <a th:href="@{/}">Boekenwinkel</a>
 
-        <div>
+        <div sec:authorize="!isAuthenticated()">
             <a th:href="@{/login}">Inloggen</a>
             <a th:href="@{/registreren}">Registreren</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Log uit</button>
+            </form>
         </div>
     </nav>
 

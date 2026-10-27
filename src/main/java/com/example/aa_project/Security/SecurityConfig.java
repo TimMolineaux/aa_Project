@@ -1,3 +1,4 @@
+
 package com.example.aa_project.Security;
 
 import org.springframework.context.annotation.Bean;
@@ -13,14 +14,33 @@ public class SecurityConfig {
             HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/boeken/**",
+                                "/login",
+                                "/registreren",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/user/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.disable())
-                .httpBasic(basic -> basic.disable());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+                );
 
         return http.build();
     }
-
 }

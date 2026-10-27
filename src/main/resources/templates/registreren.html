@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:insert="~{layout :: navbar}"></div>
+
+<main>
+    <h1>Account aanmaken</h1>
+
+    <p th:if="${foutmelding}" th:text="${foutmelding}"></p>
+
+    <form th:action="@{/registreren}"
+          th:object="${gebruiker}"
+          method="post">
+
+        <div>
+            <label for="email">E-mailadres</label>
+            <input type="email"
+                   id="email"
+                   th:field="*{email}"
+                   autocomplete="email"
+                   required>
+
+            <p th:if="${#fields.hasErrors('email')}"
+               th:errors="*{email}"></p>
+        </div>
+
+        <div>
+            <label for="password">Wachtwoord</label>
+            <input type="password"
+                   id="password"
+                   th:field="*{password}"
+                   autocomplete="new-password"
+                   minlength="8"
+                   maxlength="70"
+                   required>
+
+            <p th:if="${#fields.hasErrors('password')}"
+               th:errors="*{password}"></p>
+        </div>
+
+        <button type="submit">Account aanmaken</button>
+    </form>
+
+    <p>
+        Heb je al een account?
+        <a th:href="@{/login}">Log in</a>.
+    </p>
+</main>
+
+</body>
+</html>

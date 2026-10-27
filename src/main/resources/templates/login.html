@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:insert="~{layout :: navbar}"></div>
+
+<main>
+    <h1>Inloggen</h1>
+
+    <p th:if="${param.error}">
+        Je e-mailadres of wachtwoord is onjuist.
+    </p>
+
+    <p th:if="${param.logout}">
+        Je bent succesvol uitgelogd.
+    </p>
+
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label for="email">E-mailadres</label>
+            <input type="email"
+                   id="email"
+                   name="email"
+                   autocomplete="email"
+                   required>
+        </div>
+
+        <div>
+            <label for="password">Wachtwoord</label>
+            <input type="password"
+                   id="password"
+                   name="password"
+                   autocomplete="current-password"
+                   required>
+        </div>
+
+        <button type="submit">Inloggen</button>
+    </form>
+
+    <p>
+        Nog geen account?
+        <a th:href="@{/registreren}">Registreer je hier</a>.
+    </p>
+</main>
+
+</body>
+</html>
