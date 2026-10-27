@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:insert="layout :: navbar"></div>
+
+<main>
+    <h1>Openstaande reservaties</h1>
+
+    <p th:if="${#lists.isEmpty(reservaties)}">
+        Je hebt momenteel geen openstaande reservaties.
+    </p>
+
+    <p th:if="${bevestiging}"
+       th:text="${bevestiging}">
+    </p>
+
+    <p th:if="${foutmelding}"
+       th:text="${foutmelding}">
+    </p>
+
+    <table th:unless="${#lists.isEmpty(reservaties)}">
+        <thead>
+        <tr>
+            <th>Boek</th>
+            <th>Aantal</th>
+            <th>Afhaaldatum</th>
+            <th>Actie</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="reservatie : ${reservaties}">
+            <td th:text="${reservatie.boek.titel}"></td>
+            <td th:text="${reservatie.amount}"></td>
+            <td th:text="${reservatie.pickupDate}"></td>
+            <td>
+                <form th:action="@{/reservaties/{id}/voltooien(id=${reservatie.reservatieId})}"
+                      method="post">
+                    <button type="submit">Voltooien</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

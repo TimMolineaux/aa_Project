@@ -17,6 +17,8 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/reservaties}">Reservaties</a>
+            <a th:href="@{/aankopen}">Aankopen</a>
             <form th:action="@{/logout}" method="post">
                 <button type="submit">Log uit</button>
             </form>
