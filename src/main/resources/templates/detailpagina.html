@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div th:insert="layout :: navbar"></div>
+<div th:insert="~{layout :: navbar}"></div>
 
 <main>
     <a th:href="@{/}">← Terug naar de catalogus</a>
@@ -42,6 +42,54 @@
         <strong>Aantal op voorraad:</strong>
         <span th:text="${boek.voorraad}"></span>
     </p>
+
+    <p th:if="${bevestiging}"
+       th:text="${bevestiging}">
+    </p>
+
+    <p th:if="${foutmelding}"
+       th:text="${foutmelding}">
+    </p>
+
+    <section sec:authorize="isAuthenticated()"
+             xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+        <h2>Boek reserveren</h2>
+
+        <p th:if="${boek.voorraad == 0}">
+            Dit boek is momenteel uitverkocht.
+        </p>
+
+        <form th:if="${boek.voorraad > 0}"
+              th:action="@{/boeken/{isbn}/reserveren(isbn=${boek.isbn})}"
+              method="post">
+
+            <label for="aantal">Aantal:</label>
+
+            <input type="number"
+                   id="aantal"
+                   name="aantal"
+                   value="1"
+                   min="1"
+                   th:max="${boek.voorraad}"
+                   required>
+
+            <button type="submit">Reserveren</button>
+        </form>
+
+    </section>
+
+    <section sec:authorize="!isAuthenticated()"
+             xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+        <p>
+            Wil je dit boek reserveren?
+            <a th:href="@{/login}">Log in</a>
+            of
+            <a th:href="@{/registreren}">maak een account aan</a>.
+        </p>
+
+    </section>
 
     <h2>Reviews</h2>
     <p>TBD</p>

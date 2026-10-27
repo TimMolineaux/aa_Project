@@ -22,7 +22,7 @@ public class Reservatie {
     private  Boek boek;
 
     @Min(1)
-    private int ammount;
+    private int amount;
 
     @NotNull
     private LocalDate pickupDate;
@@ -33,12 +33,12 @@ public class Reservatie {
 
     }
 
-    public Reservatie(int reservatieId, Gebruiker gebruiker, Boek boek, int ammount, LocalDate pickupDate, boolean status) {
+    public Reservatie(int reservatieId, Gebruiker gebruiker, Boek boek, int amount, LocalDate pickupDate, boolean status) {
         this.reservatieId = reservatieId;
         this.gebruiker = gebruiker;
         this.boek = boek;
-        this.ammount = ammount;
-        this.pickupDate = pickupDate;
+        this.amount = amount;
+        this.pickupDate = LocalDate.now();
         this.status = status;
     }
 
@@ -66,12 +66,12 @@ public class Reservatie {
         this.boek = boek;
     }
 
-    public int getAmmount() {
-        return ammount;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAmmount(int ammount) {
-        this.ammount = ammount;
+    public void setAmount(int ammount) {
+        this.amount = ammount;
     }
 
     public LocalDate getPickupDate() {
