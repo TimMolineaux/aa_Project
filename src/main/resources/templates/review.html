@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:insert="~{layout :: navbar}"></div>
+
+<main>
+    <h1>Review schrijven</h1>
+
+    <h2 th:text="${boek.titel}">Boektitel</h2>
+
+    <form th:action="@{/reviews/nieuw/{isbn}(isbn=${boek.isbn})}"
+          th:object="${review}"
+          method="post">
+
+        <div>
+            <label for="score">Score (1 tot 5)</label>
+            <select id="score" th:field="*{score}" required>
+                <option value="0">Kies een score</option>
+                <option value="1">1 - Slecht</option>
+                <option value="2">2 - Matig</option>
+                <option value="3">3 - Gemiddeld</option>
+                <option value="4">4 - Goed</option>
+                <option value="5">5 - Uitstekend</option>
+            </select>
+            <p th:if="${#fields.hasErrors('score')}"
+               th:errors="*{score}"></p>
+        </div>
+
+        <div>
+            <label for="description">Je review</label>
+            <textarea id="description"
+                      th:field="*{description}"
+                      minlength="30"
+                      maxlength="500"
+                      required></textarea>
+
+            <p th:if="${#fields.hasErrors('description')}"
+               th:errors="*{description}"></p>
+        </div>
+
+        <button type="submit">Review plaatsen</button>
+    </form>
+
+    <p>
+        <a th:href="@{/boeken/{isbn}(isbn=${boek.isbn})}">
+            Terug naar het boek
+        </a>
+    </p>
+</main>
+
+</body>
+</html>

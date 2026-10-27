@@ -11,6 +11,16 @@
 <main>
     <h1>Mijn aankopen</h1>
 
+    <p th:if="${bevestiging}"
+       th:text="${bevestiging}"
+       style="color: green;">
+    </p>
+
+    <p th:if="${foutmelding}"
+       th:text="${foutmelding}"
+       style="color: red;">
+    </p>
+
     <p th:if="${#lists.isEmpty(aankopen)}">
         Je hebt nog geen aankopen.
     </p>
@@ -29,6 +39,11 @@
             <td th:text="${aankoop.boek.titel}"></td>
             <td th:text="${aankoop.amount}"></td>
             <td th:text="${aankoop.purchaseDate}"></td>
+            <td>
+                <a th:href="@{/reviews/nieuw/{isbn}(isbn=${aankoop.boek.isbn})}">
+                    Review schrijven
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
