@@ -13,12 +13,12 @@
 
     <p th:if="${bevestiging}"
        th:text="${bevestiging}"
-       style="color: green;">
+       class="melding-succes">
     </p>
 
     <p th:if="${foutmelding}"
        th:text="${foutmelding}"
-       style="color: red;">
+       class="melding-fout">
     </p>
 
     <p th:if="${#lists.isEmpty(aankopen)}">

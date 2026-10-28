@@ -28,7 +28,7 @@
                 <option value="5">5 - Uitstekend</option>
             </select>
             <p th:if="${#fields.hasErrors('score')}"
-               th:errors="*{score}"></p>
+               th:errors="*{score}" class="melding-fout"></p>
         </div>
 
         <div>
@@ -40,7 +40,7 @@
                       required></textarea>
 
             <p th:if="${#fields.hasErrors('description')}"
-               th:errors="*{description}"></p>
+               th:errors="*{description}" class="melding-fout"></p>
         </div>
 
         <button type="submit">Review plaatsen</button>

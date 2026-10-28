@@ -13,6 +13,16 @@
 
     <h1 th:text="${boek.titel}">Boektitel</h1>
 
+    <p th:if="${bevestiging}"
+       th:text="${bevestiging}"
+       class="melding-succes">
+    </p>
+
+    <p th:if="${foutmelding}"
+       th:text="${foutmelding}"
+       class="melding-fout">
+    </p>
+
     <p>
         <strong>ISBN:</strong>
         <span th:text="${boek.isbn}"></span>
@@ -41,14 +51,6 @@
     <p>
         <strong>Aantal op voorraad:</strong>
         <span th:text="${boek.voorraad}"></span>
-    </p>
-
-    <p th:if="${bevestiging}"
-       th:text="${bevestiging}">
-    </p>
-
-    <p th:if="${foutmelding}"
-       th:text="${foutmelding}">
     </p>
 
     <section sec:authorize="isAuthenticated()"

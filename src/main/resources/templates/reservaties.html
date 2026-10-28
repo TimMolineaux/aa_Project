@@ -16,11 +16,13 @@
     </p>
 
     <p th:if="${bevestiging}"
-       th:text="${bevestiging}">
+       th:text="${bevestiging}"
+       class="melding-succes">
     </p>
 
     <p th:if="${foutmelding}"
-       th:text="${foutmelding}">
+       th:text="${foutmelding}"
+       class="melding-fout">
     </p>
 
     <table th:unless="${#lists.isEmpty(reservaties)}">
