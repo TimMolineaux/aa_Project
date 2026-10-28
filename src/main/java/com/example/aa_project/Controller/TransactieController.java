@@ -38,7 +38,7 @@ public class TransactieController {
 
     @PostMapping("/boeken/{isbn}/reserveren")
     @Transactional
-    public String reserveerBoek(
+    public String reserveBook(
             @PathVariable String isbn,
             @RequestParam int aantal,
             Authentication authentication,

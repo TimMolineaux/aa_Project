@@ -43,7 +43,7 @@ public class LoginController {
     }
 
     @PostMapping("/registreren")
-    public String registreren(
+    public String register(
             @Valid @ModelAttribute("gebruiker") Gebruiker gebruiker,BindingResult bindingResult,Model model, HttpServletRequest request,
             HttpServletResponse response) {
 

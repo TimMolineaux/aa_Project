@@ -37,7 +37,7 @@ public class ReviewPaginaController {
     }
 
     @GetMapping("/reviews/nieuw/{isbn}")
-    public String toonReviewFormulier(
+    public String showReviewForm(
             @PathVariable String isbn,
             Authentication authentication,
             Model model,
@@ -84,7 +84,7 @@ public class ReviewPaginaController {
 
 
     @PostMapping("/reviews/nieuw/{isbn}")
-    public String bewaarReview(
+    public String saveReview(
             @PathVariable String isbn,
             @Valid Review review,
             BindingResult bindingResult,
