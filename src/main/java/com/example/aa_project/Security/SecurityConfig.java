@@ -23,7 +23,11 @@ public class SecurityConfig {
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",
-                                "/user/**"
+                                "/user/**",
+                                "/book/**",
+                                "/purchase/**",
+                                "/reservation/**",
+                                "/review/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

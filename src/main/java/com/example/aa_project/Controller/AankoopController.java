@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/aankoop")
+@RequestMapping("/purchase")
 public class AankoopController {
 
     public AankoopDAO aankoopDAO;
